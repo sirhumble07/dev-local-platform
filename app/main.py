@@ -35,7 +35,7 @@ async def metrics_middleware(request: Request, call_next: Callable):
         response = await call_next(request)
         status_code = response.status_code
         return response
-    except Exception as exc:  # capture exceptions as 500s
+    except Exception:  # capture exceptions as 500s
         status_code = 500
         logger.exception("Unhandled exception")
         raise
