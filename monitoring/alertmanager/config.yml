@@ -1,0 +1,16 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: 'devops-oncall'
+  group_wait: 10s
+  group_interval: 10m
+  repeat_interval: 1h
+
+receivers:
+  - name: 'devops-oncall'
+    webhook_configs:
+      - url: 'http://example.com/alert-receiver' # Replace with your webhook (Slack, PagerDuty, custom)
+        send_resolved: true
+
+# For local testing you can point this to a local test server or service like webhook.site
