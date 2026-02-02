@@ -1,4 +1,3 @@
-import os
 import sys
 import pytest
 
@@ -7,12 +6,11 @@ import pytest
 # Skip tests on those runtimes and run on Python 3.11 in CI for reproducibility.
 pytestmark = pytest.mark.skipif(sys.version_info >= (3, 14), reason="httpx/httpcore incompatible with Python 3.14; run tests with Python 3.11")
 
-from main import app
-
 
 def get_client():
-    # Import TestClient lazily to avoid importing httpx at module-import time
+    # Import TestClient and app lazily to avoid importing httpx at module-import time
     from fastapi.testclient import TestClient
+    from main import app
     return TestClient(app)
 
 
